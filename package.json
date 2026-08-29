@@ -50,6 +50,10 @@
     "@tailwindcss/oxide": true,
     "bcrypt": true,
     "core-js": true,
-    "esbuild": true
+    "esbuild": true,
+    "msgpackr-extract": true,
+    "sharp": true,
+    "unrs-resolver": true,
+    "workerd": true
   }
 }
