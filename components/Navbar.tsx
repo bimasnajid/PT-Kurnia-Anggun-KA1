@@ -5,8 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { ShoppingCart, User } from "react-feather";
-import { Star, CreditCard, Clock, Truck, Heart, Gift } from "lucide-react";
+import { Star, CreditCard, Clock, Truck, Heart, Gift, ShoppingCart, User } from "lucide-react";
 import { ReactNode } from "react";
 
 // ====================== MENU ======================
