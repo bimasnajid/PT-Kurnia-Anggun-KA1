@@ -1,12 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* ... konfigurasi Anda yang sudah ada ... */
+  /* ... jika ada konfigurasi bawaan Anda yang lain, biarkan tetap di sini ... */
+  
   eslint: {
-    ignoreDuringBuilds: true, // Melewati error linting
+    // Mengabaikan error ESLint (seperti variabel tak terpakai di Navbar) saat build
+    ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: true, // Melewati error type check module Prisma ini
+    // PENTING: Mengabaikan error type-check (seperti modul prisma/config) saat build
+    ignoreBuildErrors: true,
   },
 };
 
