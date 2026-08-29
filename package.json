@@ -45,5 +45,11 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "allowScripts": {
+    "@tailwindcss/oxide": true,
+    "bcrypt": true,
+    "core-js": true,
+    "esbuild": true
   }
 }
