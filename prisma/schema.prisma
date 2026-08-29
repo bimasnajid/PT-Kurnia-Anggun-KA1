@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // atau "sqlite" jika pakai sqlite
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id         String    @id @default(uuid())
+  name       String
+  email      String    @unique
+  password   String
+  phone      String?
+  address    String?
+  role       Role      @default(CUSTOMER)
+  createdAt  DateTime  @default(now())
+  orders     Order[]
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id           String       @id @default(uuid())
+  customer     Customer     @relation(fields: [customerId], references: [id])
+  customerId   String
+  items        OrderItem[]
+  totalAmount  Float
+  currency     String       @default("IDR")
+  status       OrderStatus  @default(PENDING)
+  payment      Payment?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model OrderItem {
+  id       String  @id @default(uuid())
+  order    Order   @relation(fields: [orderId], references: [id])
+  orderId  String
+  name     String
+  price    Float
+  qty      Int
+}
+
+model Payment {
+  id             String        @id @default(uuid())
+  order          Order         @relation(fields: [orderId], references: [id])
+  orderId        String
+  method         PaymentMethod
+  status         PaymentStatus @default(INITIATED)
+  amount         Float
+  currency       String        @default("IDR")
+  metadata       Json?
+  transactions   Transaction[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Transaction {
+  id          String      @id @default(uuid())
+  payment     Payment     @relation(fields: [paymentId], references: [id])
+  paymentId   String
+  type        String      // e.g., "PAYMENT_INIT", "PAYMENT_RECEIVED", "LC_ISSUED"
+  detail      String?
+  actor       String?     // who triggered
+  createdAt   DateTime    @default(now())
+}
+
+enum PaymentMethod {
+  ADVANCE_PAYMENT
+  LETTER_OF_CREDIT
+  CASH
+  DOCUMENTARY_COLLECTION
+}
+
+enum PaymentStatus {
+  INITIATED
+  PENDING
+  COMPLETED
+  REJECTED
+  CANCELLED
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
