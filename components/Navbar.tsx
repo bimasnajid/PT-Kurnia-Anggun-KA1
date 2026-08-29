@@ -7,6 +7,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { ShoppingCart, User } from "react-feather";
 import { Star, CreditCard, Clock, Truck, Heart, Gift } from "lucide-react";
+import { ReactNode } from "react";
 
 // ====================== MENU ======================
 type MenuItem = {
@@ -38,8 +39,7 @@ const menuItems: MenuItem[] = [
   { label: "Contact", href: "#contact" },
 ];
 
-// FEATURE ICON COMPONENT
-const Feature = ({ icon, text }: any) => (
+const Feature = ({ icon, text }: { icon: ReactNode; text: string }) => (
   <div className="flex items-center gap-3 text-black">
     <span className="text-xl">{icon}</span>
     <span>{text}</span>
@@ -97,7 +97,7 @@ export default function Navbar() {
 
     {
       id: "2",
-      name: 'Milano Bed Queen L/R',
+      name: "Milano Bed Queen L/R",
       price: 2799,
       image: "/ReactCoffee54.jpg",
       quantity: 1,
@@ -112,8 +112,8 @@ export default function Navbar() {
       prev.map((item) =>
         item.id === id
           ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item
-      )
+          : item,
+      ),
     );
   };
 
@@ -125,7 +125,7 @@ export default function Navbar() {
   // Totals
   const merchandiseTotal = cart.reduce(
     (acc, i) => acc + i.price * i.quantity,
-    0
+    0,
   );
 
   const shipTotal = cart.reduce((acc, i) => acc + i.shipFee, 0);
@@ -289,7 +289,7 @@ export default function Navbar() {
                       <button
                         onClick={() =>
                           setOpenMenu(
-                            openMenu === item.label ? null : item.label
+                            openMenu === item.label ? null : item.label,
                           )
                         }
                         className="w-full py-2 hover:text-blue-600"
