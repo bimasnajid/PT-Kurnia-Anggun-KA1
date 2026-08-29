@@ -48,9 +48,3 @@ my-landing-page/
 ├─ package.json
 └─ README.md
 ```
-
----
-
-## 📌 Catatan Project
-* **Status:** Projects Magang / PKL
-* **Repository Utama:** PT-Kurnia-Anggun-KA1

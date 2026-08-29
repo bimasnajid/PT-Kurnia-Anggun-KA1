@@ -67,7 +67,7 @@ export default function Navbar() {
     if (data) {
       try {
         setUser(JSON.parse(data));
-      } catch (e) {
+      } catch {
         console.error("Invalid user JSON");
       }
     }
